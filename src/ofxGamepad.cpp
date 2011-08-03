@@ -79,3 +79,26 @@ void ofxGamepad::setNumButtons(int amt)
 	buttonValues.resize(numButtons);
 }
 
+void ofxGamepad::draw(int x, int y)
+{
+	ofPushMatrix();
+	ofTranslate(x, y);
+	ofSetColor(255);
+	ofPushMatrix();
+	ofRotate(90);
+	ofDrawBitmapString(name, 0, 0);
+	ofPopMatrix();
+	int margin=3;
+	ofRectangle axisSize(20,0,80, 13);
+	for(int i=0;i<getNumAxis();i++){
+		ofSetColor(120);
+		ofRect(axisSize);
+		ofSetColor(255);
+		float x =  ofMap(getAxisValue(i), -1, 1, axisSize.x, axisSize.width+axisSize.x);
+		ofLine(x, axisSize.y, x, axisSize.y+axisSize.height);
+		ofSetColor(0);
+		ofDrawBitmapString(ofToString(i), axisSize.x, axisSize.y+axisSize.height-1);
+		axisSize.y+=axisSize.height+margin;
+	}
+	ofPopMatrix();
+}

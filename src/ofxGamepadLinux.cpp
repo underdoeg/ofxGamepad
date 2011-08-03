@@ -1,5 +1,6 @@
 #include "ofxGamepadLinux.h"
 #include <fcntl.h>
+#include <linux/joystick.h>
 
 ofxGamepadLinux::ofxGamepadLinux(string f):ofxGamepad()
 {
@@ -41,9 +42,7 @@ ofxGamepadLinux::~ofxGamepadLinux()
 void ofxGamepadLinux::update()
 {
 	struct js_event event;
-
-	ssize_t len = read(fd, &event, sizeof(event));
-
+	ssize_t len = read(fd, &event, sizeof(struct js_event));
 	if (len < 0) {
 		std::ostringstream str;
 		ofLog(OF_LOG_WARNING, "something strange happend while reading joystick data");
@@ -56,4 +55,8 @@ void ofxGamepadLinux::update()
 	} else {
 		ofLog(OF_LOG_ERROR, "Joystick::update(): unknown read error");
 	}
+}
+void ofxGamepadLinux::exit()
+{
+	close(fd);
 }

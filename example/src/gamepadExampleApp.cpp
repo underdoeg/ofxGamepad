@@ -8,7 +8,6 @@ void gamepadExampleApp::setup(){
 	ofSetFrameRate(60);
 	ofSetLogLevel(OF_LOG_NOTICE);
 
-	ofxGamepadHandler::get();
 }
 
 //--------------------------------------------------------------
@@ -17,7 +16,7 @@ void gamepadExampleApp::update(){
 
 //--------------------------------------------------------------
 void gamepadExampleApp::draw(){
-
+	ofxGamepadHandler::get()->draw(10,10);
 }
 
 //--------------------------------------------------------------

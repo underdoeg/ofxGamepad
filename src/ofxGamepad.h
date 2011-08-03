@@ -37,7 +37,6 @@ public:
 	void buttonReleased(int button);
 	void buttonPressed(int button);
 
-
 	bool getButtonValue(int button);
 	float getAxisValue(int axis);
 	float getAxisValueU(int axis);
@@ -49,12 +48,17 @@ public:
 	ofEvent<ofxGamepadButtonEvent> onButtonPressed;
 	ofEvent<ofxGamepadButtonEvent> onButtonReleased;
 
+	void draw(int x, int y);
+	virtual void exit(){};
+
 	string name;
 protected:
 	void axisChanged(int axis, int value);
 	void buttonChanged(int button, bool value);
 	void setNumAxis(int amount);
 	void setNumButtons(int amount);
+
+
 
 	int axisMinVal;
 	int axisMaxVal;

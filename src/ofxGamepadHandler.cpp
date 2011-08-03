@@ -10,6 +10,7 @@ bool ofxGamepadHandler::hasSingleton = false;
 ofxGamepadHandler::ofxGamepadHandler()
 {
 	ofAddListener(ofEvents.update, this, &ofxGamepadHandler::update);
+	ofAddListener(ofEvents.exit, this, &ofxGamepadHandler::exit);
 	updatePadList();
 }
 
@@ -51,4 +52,30 @@ void ofxGamepadHandler::update(ofEventArgs &args){
 		(*it)->update();
 		++it;
 	}
+}
+
+void ofxGamepadHandler::draw(int x, int y)
+{
+	ofPushMatrix();
+	ofTranslate(x, y);
+	ofPoint offset(x, y);
+
+	gamepadList::iterator it=gamepads.begin();
+	while(it!=gamepads.end()){
+		(*it)->draw(offset.x, offset.y);
+		++it;
+		offset+=ofPoint(200, 0);
+	}
+
+	ofPopMatrix();
+}
+
+void ofxGamepadHandler::exit(ofEventArgs& arg)
+{
+	gamepadList::iterator it=gamepads.begin();
+	while(it!=gamepads.end()){
+		(*it)->exit();
+		++it;
+	}
+	delete this;
 }

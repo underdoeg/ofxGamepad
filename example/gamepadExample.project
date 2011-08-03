@@ -24,7 +24,7 @@
     <File Name="../src/ofxGamepadHandler.h"/>
     <File Name="../src/ofxGamepadLinux.cpp"/>
     <File Name="../src/ofxGamepadLinux.h"/>
-    <File Name="../src/README"/>
+    <File Name="../src/ofxGamepadConfigs.h"/>
   </VirtualDirectory>
   <Settings Type="Dynamic Library">
     <GlobalSettings>
