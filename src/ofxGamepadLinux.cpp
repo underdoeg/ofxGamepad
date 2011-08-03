@@ -1,4 +1,7 @@
 #include "ofxGamepadLinux.h"
+
+#ifdef TARGET_LINUX
+
 #include <fcntl.h>
 #include <linux/joystick.h>
 
@@ -61,3 +64,5 @@ void ofxGamepadLinux::exit()
 {
 	close(fd);
 }
+
+#endif

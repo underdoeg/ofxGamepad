@@ -1,7 +1,10 @@
 #include "ofxGamepad.h"
 
-ofxGamepad::ofxGamepad():axisMinVal(-32768),axisMaxVal(32767)
+int ofxGamepad::curID=0;
+
+ofxGamepad::ofxGamepad():id(curID),axisMinVal(-32768),axisMaxVal(32767)
 {
+	curID++;
 }
 
 ofxGamepad::~ofxGamepad()
@@ -81,24 +84,63 @@ void ofxGamepad::setNumButtons(int amt)
 
 void ofxGamepad::draw(int x, int y)
 {
+	int curX=0;
+	int highestY;
+
 	ofPushMatrix();
 	ofTranslate(x, y);
 	ofSetColor(255);
 	ofPushMatrix();
 	ofRotate(90);
-	ofDrawBitmapString(name, 0, 0);
+	ofDrawBitmapString(name+" ("+ofToString(id)+")", 0, 0);
 	ofPopMatrix();
+	curX=17;
+
 	int margin=3;
-	ofRectangle axisSize(20,0,80, 13);
-	for(int i=0;i<getNumAxis();i++){
-		ofSetColor(120);
+	ofRectangle axisSize(curX,0,85, 17);
+	for(int i=0; i<getNumAxis(); i++) {
+		ofSetColor(70);
 		ofRect(axisSize);
 		ofSetColor(255);
 		float x =  ofMap(getAxisValue(i), -1, 1, axisSize.x, axisSize.width+axisSize.x);
 		ofLine(x, axisSize.y, x, axisSize.y+axisSize.height);
-		ofSetColor(0);
+		ofSetColor(20);
 		ofDrawBitmapString(ofToString(i), axisSize.x, axisSize.y+axisSize.height-1);
 		axisSize.y+=axisSize.height+margin;
+		if(axisSize.y>highestY)
+			highestY=axisSize.y;
 	}
+
+	curX+=axisSize.width+margin;
+	ofRectangle btnSize(curX,0,17,17);
+	for(int i=0; i<getNumButtons(); i++) {
+		if(getButtonValue(i))
+			ofSetColor(255);
+		else
+			ofSetColor(70);
+		ofRect(btnSize);
+		btnSize.y+=btnSize.height+margin;
+		ofSetColor(20);
+		ofDrawBitmapString(ofToString(i), btnSize.x, btnSize.y-4);
+		if(btnSize.y>highestY)
+			highestY=axisSize.y;
+	}
+	curX+=btnSize.width;
+
 	ofPopMatrix();
+
+	drawSize.x=curX;
+	drawSize.y=highestY;
+}
+
+void ofxGamepad::setName(string n)
+{
+	name = n;
+	if(name==PS3_NAME) {
+		type = GAMEPAD_PS3;
+	} else if(name==XBOX_NAME) {
+		type = GAMEPAD_XBOX;
+	} else {
+		type = GAMEPAD_UNKNOWN;
+	}
 }

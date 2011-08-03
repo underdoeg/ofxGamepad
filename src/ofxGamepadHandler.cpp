@@ -63,8 +63,8 @@ void ofxGamepadHandler::draw(int x, int y)
 	gamepadList::iterator it=gamepads.begin();
 	while(it!=gamepads.end()){
 		(*it)->draw(offset.x, offset.y);
+		offset+=ofPoint((*it)->drawSize.x+20, 0);
 		++it;
-		offset+=ofPoint(200, 0);
 	}
 
 	ofPopMatrix();
@@ -79,3 +79,14 @@ void ofxGamepadHandler::exit(ofEventArgs& arg)
 	}
 	delete this;
 }
+
+ofxGamepad* ofxGamepadHandler::getGamepad(int num)
+{
+	return gamepads[num].get();
+}
+
+int ofxGamepadHandler::getNumPads()
+{
+	return gamepads.size();
+}
+

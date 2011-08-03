@@ -2,6 +2,7 @@
 #define OFXGAMEPAD_H
 
 #include "ofMain.h"
+#include "ofxGamepadConfigs.h"
 
 class ofxGamepad;
 
@@ -51,19 +52,23 @@ public:
 	void draw(int x, int y);
 	virtual void exit(){};
 
+	ofPoint drawSize;
 	string name;
+	int id;
+	GAMEPAD_TYPE type;
+
 protected:
 	void axisChanged(int axis, int value);
 	void buttonChanged(int button, bool value);
 	void setNumAxis(int amount);
 	void setNumButtons(int amount);
-
-
+	void setName(string name);
 
 	int axisMinVal;
 	int axisMaxVal;
 
 private:
+	static int curID;
 	int numAxis;
 	int numButtons;
 	std::vector<bool> buttonValues;

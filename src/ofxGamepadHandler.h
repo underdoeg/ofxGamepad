@@ -12,6 +12,9 @@ public:
 	~ofxGamepadHandler();
 	static ofxGamepadHandler* get();
 
+	int getNumPads();
+	ofxGamepad* getGamepad(int num);
+
 	void updatePadList();
 	void update(ofEventArgs &arg);
 	void draw(int x, int y);
