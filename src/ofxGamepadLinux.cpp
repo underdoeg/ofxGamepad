@@ -27,6 +27,8 @@ ofxGamepadLinux::ofxGamepadLinux(string f):ofxGamepad()
 		} else {
 			name = name_c_str;
 		}
+
+		fcntl( fd, F_SETFL, O_NONBLOCK );
 	}
 
 	string msg=name;
@@ -42,19 +44,18 @@ ofxGamepadLinux::~ofxGamepadLinux()
 void ofxGamepadLinux::update()
 {
 	struct js_event event;
-	ssize_t len = read(fd, &event, sizeof(struct js_event));
-	if (len < 0) {
-		std::ostringstream str;
-		ofLog(OF_LOG_WARNING, "something strange happend while reading joystick data");
-	} else if (len == sizeof(event)) {
-		if (event.type & JS_EVENT_AXIS) {
-			axisChanged(int(event.number), int(event.value));
-		} else if (event.type & JS_EVENT_BUTTON) {
-			buttonChanged(int(event.number), bool(event.value));
-		}
-	} else {
-		ofLog(OF_LOG_ERROR, "Joystick::update(): unknown read error");
+	read(fd, &event, sizeof(struct js_event));
+
+	/* see what to do with the event */
+	switch (event.type & ~JS_EVENT_INIT) {
+	case JS_EVENT_AXIS:
+		axisChanged(event.number, event.value);
+		break;
+	case JS_EVENT_BUTTON:
+		buttonChanged(event.number, event.value);
+		break;
 	}
+
 }
 void ofxGamepadLinux::exit()
 {

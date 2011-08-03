@@ -5,7 +5,7 @@ void gamepadExampleApp::setup(){
 	ofSetWindowTitle("gamepadExampleApp");
 	ofBackground(0,0,0);
 
-	ofSetFrameRate(60);
+	ofSetFrameRate(120);
 	ofSetLogLevel(OF_LOG_NOTICE);
 
 }

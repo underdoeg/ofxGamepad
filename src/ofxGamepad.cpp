@@ -1,6 +1,6 @@
 #include "ofxGamepad.h"
 
-ofxGamepad::ofxGamepad():axisMinVal(-32767),axisMaxVal(32767)
+ofxGamepad::ofxGamepad():axisMinVal(-32768),axisMaxVal(32767)
 {
 }
 
