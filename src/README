@@ -1,0 +1,3 @@
+Gamepad support for OpenFrameworks
+
+Currently only linux is supported. I'll probably add a ofxGamepadOIS at some point to have cross platform capabilities, but it's currently not too high on the list...

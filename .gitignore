@@ -1,0 +1,6 @@
+example/bin/example
+example/bin/libs
+example/example.tags
+example/emptyExample.workspace.session
+example/obj/
+.DS_Store
