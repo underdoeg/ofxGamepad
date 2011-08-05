@@ -17,6 +17,40 @@ ofxGamepadOIS::ofxGamepadOIS(InputManager* inputManager){
 	setNumButtons(joystick->getNumberOfComponents(OIS_Button));
 	setName(joystick->vendor());
 	joystick->setEventCallback(this);
+
+        forceFeedback = (OIS::ForceFeedback*)joystick->queryInterface( OIS::Interface::ForceFeedback );
+	if( forceFeedback )
+	{
+		bFFFound = true;
+				
+		cout << endl << " * Number of force feedback axes : " << forceFeedback->getFFAxesNumber() << endl;
+		const OIS::ForceFeedback::SupportedEffectList &lstFFEffects = forceFeedback->getSupportedEffects();
+		if (lstFFEffects.size() > 0)
+		{
+			stringstream msg; 
+			msg << " * Supported effects :" << std::endl;
+			ofLog(OF_LOG_VERBOSE, msg.str());
+			
+			OIS::ForceFeedback::SupportedEffectList::const_iterator itFFEff;
+			for(itFFEff = lstFFEffects.begin(); itFFEff != lstFFEffects.end(); ++itFFEff)
+			{
+				stringstream msg; 
+				msg << OIS::Effect::getEffectTypeName(itFFEff->second) << std::endl;
+				ofLog(OF_LOG_VERBOSE, msg.str());
+			}
+		}
+		else{
+			stringstream msg; 
+			msg << "No supported effect found!" << std::endl;
+			ofLog(OF_LOG_WARNING, msg.str());
+		}
+	}else{
+		stringstream msg; 
+		msg << "No force feedback support detected!" << std::endl;
+		ofLog(OF_LOG_WARNING, msg.str());
+		
+		bFFFound = false;
+	}
 };
 
 ofxGamepadOIS::~ofxGamepadOIS(){
