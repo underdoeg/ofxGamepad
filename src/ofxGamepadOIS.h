@@ -28,6 +28,9 @@ private:
 	bool vector3Moved( const OIS::JoyStickEvent &arg, int index);
 
 	OIS::JoyStick* joystick;
+
+        OIS::ForceFeedback* forceFeedback;
+	bool bFFFound;
 };
 
 #endif
