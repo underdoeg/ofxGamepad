@@ -1,7 +1,21 @@
 #include "ofxGamepadHandler.h"
 
-#ifdef TARGET_LINUX
+#if defined(TARGET_OSX) || defined(TARGET_OS_WIN32)
+#define USE_OIS
+#endif
+
+#if defined(TARGET_LINUX) && ! defined(USE_OIS)
 #include "ofxGamepadLinux.h"
+#endif
+
+#ifdef USE_OIS
+#include "OIS.h"
+#include "ofxGamepadOIS.h"
+
+using namespace OIS;
+
+InputManager* oisInputManager;
+
 #endif
 
 ofxGamepadHandler* ofxGamepadHandler::singleton;
@@ -11,6 +25,10 @@ ofxGamepadHandler::ofxGamepadHandler()
 {
 	ofAddListener(ofEvents.update, this, &ofxGamepadHandler::update);
 	ofAddListener(ofEvents.exit, this, &ofxGamepadHandler::exit);
+#ifdef USE_OIS
+	ParamList pl;
+	oisInputManager=InputManager::createInputSystem(pl);
+#endif
 	updatePadList();
 }
 
@@ -29,7 +47,22 @@ ofxGamepadHandler* ofxGamepadHandler::get()
 
 void ofxGamepadHandler::updatePadList()
 {
-#ifdef TARGET_LINUX
+#ifdef USE_OIS
+	try
+	{
+		int numSticks = oisInputManager->getNumberOfDevices(OISJoyStick);
+		for( int i = 0; i < numSticks; ++i )
+		{
+			gamepads.push_back(ofPtr<ofxGamepad>(new ofxGamepadOIS(oisInputManager)));
+		}
+	}
+	catch(OIS::Exception &ex)
+	{
+		stringstream msg; 
+		msg << "\nException raised on joystick creation: " << ex.eText << std::endl;
+		ofLog(OF_LOG_ERROR, msg.str());
+	}
+#elif defined(TARGET_LINUX)
 	//check for joysticks
 	ofFile file;
 	for(int i=0; i<32; i++) {
@@ -42,7 +75,7 @@ void ofxGamepadHandler::updatePadList()
 		}
 	}
 #else
-	ofLog(OF_LOG_ERROR, "SORRY, linux only for now...");
+	ofLog(OF_LOG_ERROR, "ofxGamepad says: sorry, looks your system is not supported...");
 #endif
 }
 
