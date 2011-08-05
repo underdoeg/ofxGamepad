@@ -48,13 +48,17 @@ public:
 	ofEvent<ofxGamepadAxisEvent> onAxisChanged;
 	ofEvent<ofxGamepadButtonEvent> onButtonPressed;
 	ofEvent<ofxGamepadButtonEvent> onButtonReleased;
+	ofEvent<ofxGamepadEvent> onUnplug;
 
 	void draw(int x, int y);
 	virtual void exit(){};
 
 	ofPoint drawSize;
-	string name;
+	string name;	
 	int id;
+	
+	string uniqueName;
+
 	GAMEPAD_TYPE type;
 
 protected:

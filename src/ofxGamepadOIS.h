@@ -15,9 +15,10 @@
 
 class ofxGamepadOIS: public ofxGamepad, public OIS::JoyStickListener{
 public:
-      ofxGamepadOIS(OIS::InputManager* inputManager);
-      ~ofxGamepadOIS();
-    
+	ofxGamepadOIS(OIS::InputManager* inputManager);
+	ofxGamepadOIS(OIS::JoyStick* joystick);
+	~ofxGamepadOIS();
+    void updateJoystick(OIS::JoyStick*);
 	void update();
 		
 private:

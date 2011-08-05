@@ -11,28 +11,43 @@
 
 using namespace OIS;
 
-ofxGamepadOIS::ofxGamepadOIS(InputManager* inputManager){
-	joystick = (JoyStick*)inputManager->createInputObject(OISJoyStick, true );
+ofxGamepadOIS::ofxGamepadOIS(InputManager* inputManager):ofxGamepad(){
+	ofxGamepadOIS((JoyStick*)inputManager->createInputObject(OISJoyStick, true ));
+};
+
+ofxGamepadOIS::ofxGamepadOIS(OIS::JoyStick* js){
+	joystick = js;
 	setNumAxis(joystick->getNumberOfComponents(OIS_Axis));
 	setNumButtons(joystick->getNumberOfComponents(OIS_Button));
 	setName(joystick->vendor());
 	joystick->setEventCallback(this);
+	
+	uniqueName=name+ofToString(id);
+	
+	string msg=name;
+	msg += ": "+ofToString(getNumAxis())+" axis";
+	msg += ", "+ofToString(getNumButtons())+" buttons";
+	ofLog(OF_LOG_NOTICE, msg);
 };
 
 ofxGamepadOIS::~ofxGamepadOIS(){
 
 };
 
+void ofxGamepadOIS::updateJoystick(OIS::JoyStick* js){
+	joystick=js;
+}
+
 void ofxGamepadOIS::update(){
 	joystick->capture();
 }
 
 bool ofxGamepadOIS::buttonPressed( const OIS::JoyStickEvent &arg, int button ){
-	buttonChanged(button, 1);
+	buttonChanged(button, 0);
 	return true;
 };
 bool ofxGamepadOIS::buttonReleased( const OIS::JoyStickEvent &arg, int button ){
-	buttonChanged(button, 0);
+	buttonChanged(button, 1);
 	return true;
 };
 bool ofxGamepadOIS::axisMoved( const OIS::JoyStickEvent &arg, int axis ){
