@@ -15,6 +15,7 @@ ofxGamepadOIS::ofxGamepadOIS(InputManager* inputManager){
 	joystick = (JoyStick*)inputManager->createInputObject(OISJoyStick, true );
 	setNumAxis(joystick->getNumberOfComponents(OIS_Axis));
 	setNumButtons(joystick->getNumberOfComponents(OIS_Button));
+	setName(joystick->vendor());
 	joystick->setEventCallback(this);
 };
 
