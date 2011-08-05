@@ -1,4 +1,4 @@
 Gamepad support for OpenFrameworks
 
 On linux it's stable and fully functional, using the native <linux/joystick.h>.
-Window and Mac Versions use OIS, which is also available on linux as well. To switch you simply have to #define USE_OIS.
+Window and Mac Versions use OIS, which is also available on linux as well. To switch you simply have to #define USE_OIS. Mac and Windows should define USE_OIS automatically.
