@@ -10,8 +10,9 @@ OF_ROOT = ../../..
 # for example search paths like:
 # USER_CFLAGS = -I src/objects
 
-USER_CFLAGS = 
+#ADD THIS TO USE OIS -DUSE_OIS
 
+USER_CFLAGS = 
 
 # USER_LDFLAGS allows to pass custom flags to the linker
 # for example libraries like:
@@ -23,7 +24,7 @@ USER_LDFLAGS =
 # use this to add system libraries for example:
 # USER_LIBS = -lpango
 
-USER_LIBS = 
+USER_LIBS =
 
 
 # change this to add different compiler optimizations to your project

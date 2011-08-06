@@ -1,18 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Session Name="/home/phwhitfield/programming/openFrameworks/addons/ofxGamepad/example/example.workspace">
-  <int Value="1" Name="m_selectedTab"/>
+  <int Value="0" Name="m_selectedTab"/>
   <wxString Value="/home/phwhitfield/programming/openFrameworks/addons/ofxGamepad/example/example.workspace" Name="m_workspaceName"/>
   <TabInfoArray Name="TabInfoArray">
     <TabInfo>
       <wxString Value="/home/phwhitfield/programming/openFrameworks/addons/ofxGamepad/src/ofxGamepadHandler.cpp" Name="FileName"/>
-      <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="20" Name="CurrentLine"/>
+      <int Value="40" Name="FirstVisibleLine"/>
+      <int Value="88" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
     </TabInfo>
     <TabInfo>
       <wxString Value="/home/phwhitfield/programming/openFrameworks/addons/ofxGamepad/src/ofxGamepadHandler.h" Name="FileName"/>
       <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="12" Name="CurrentLine"/>
+      <int Value="14" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="/home/phwhitfield/programming/openFrameworks/addons/ofxGamepad/example/src/gamepadExampleApp.cpp" Name="FileName"/>
+      <int Value="0" Name="FirstVisibleLine"/>
+      <int Value="10" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="/home/phwhitfield/programming/openFrameworks/addons/ofxGamepad/example/addons.make" Name="FileName"/>
+      <int Value="0" Name="FirstVisibleLine"/>
+      <int Value="0" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="/home/phwhitfield/programming/openFrameworks/libs/openFrameworks/utils/ofFileUtils.h" Name="FileName"/>
+      <int Value="78" Name="FirstVisibleLine"/>
+      <int Value="222" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="/home/phwhitfield/programming/openFrameworks/addons/ofxGamepad/src/ofxGamepadLinux.cpp" Name="FileName"/>
+      <int Value="8" Name="FirstVisibleLine"/>
+      <int Value="55" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="/home/phwhitfield/programming/openFrameworks/addons/ofxGamepad/src/ofxGamepadLinux.h" Name="FileName"/>
+      <int Value="0" Name="FirstVisibleLine"/>
+      <int Value="24" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="/home/phwhitfield/programming/openFrameworks/addons/ofxGamepad/src/ofxGamepad.h" Name="FileName"/>
+      <int Value="25" Name="FirstVisibleLine"/>
+      <int Value="38" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="/home/phwhitfield/programming/openFrameworks/addons/ofxGamepad/src/ofxGamepad.cpp" Name="FileName"/>
+      <int Value="93" Name="FirstVisibleLine"/>
+      <int Value="110" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="/home/phwhitfield/programming/openFrameworks/addons/ofxGamepad/src/ofxGamepadConfigs.h" Name="FileName"/>
+      <int Value="0" Name="FirstVisibleLine"/>
+      <int Value="5" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
     </TabInfo>
   </TabInfoArray>

@@ -68,7 +68,7 @@ void ofxGamepadOIS::updateJoystick(OIS::JoyStick* js){
 		ofLog(OF_LOG_NOTICE, msg.str());
 		
 		bFFFound = false;
-	}	
+	}
 }
 
 void ofxGamepadOIS::update(){
@@ -95,3 +95,10 @@ bool ofxGamepadOIS::povMoved( const OIS::JoyStickEvent &arg, int pov ){
 bool ofxGamepadOIS::vector3Moved( const OIS::JoyStickEvent &arg, int index){
 	return true;
 };
+
+void ofxGamepadOIS::rumble(float level)
+{
+	if(bFFFound){
+		forceFeedback->setMasterGain(level);
+	}
+}

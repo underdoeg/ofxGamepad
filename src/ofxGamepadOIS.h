@@ -20,6 +20,7 @@ public:
 	~ofxGamepadOIS();
     void updateJoystick(OIS::JoyStick*);
 	void update();
+	void rumble(float level=1);
 		
 private:
 	bool buttonPressed( const OIS::JoyStickEvent &arg, int button );
@@ -30,7 +31,7 @@ private:
 
 	OIS::JoyStick* joystick;
 
-        OIS::ForceFeedback* forceFeedback;
+	OIS::ForceFeedback* forceFeedback;
 	bool bFFFound;
 };
 

@@ -45,6 +45,8 @@ public:
 	int getNumAxis();
 	int getNumButtons();
 
+	virtual void rumble(float level=1){};
+
 	ofEvent<ofxGamepadAxisEvent> onAxisChanged;
 	ofEvent<ofxGamepadButtonEvent> onButtonPressed;
 	ofEvent<ofxGamepadButtonEvent> onButtonReleased;

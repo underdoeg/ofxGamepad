@@ -33,7 +33,7 @@ public:
 	void updatePadList();
 	void update(ofEventArgs &arg);
 	void draw(int x, int y);
-	void enableHotplug(int interval); //interval in milliseconds the system looks for new gamepads
+	void enableHotplug(int interval=1500); //interval in milliseconds the system looks for new gamepads
 	
 	ofEvent<ofxGamepadEvent> onGamepadPlug;
 	ofEvent<ofxGamepadEvent> onGamepadUnplug;
