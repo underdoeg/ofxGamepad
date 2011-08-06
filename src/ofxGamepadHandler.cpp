@@ -1,11 +1,14 @@
 #include "ofxGamepadHandler.h"
 
 #ifdef USE_OIS
-
 using namespace OIS;
-
 InputManager* oisInputManager;
-
+class tempPad{
+public:
+	tempPad(JoyStick* s){stick=s;handled=false;};
+	JoyStick* stick;
+	bool handled;
+};
 #endif
 
 ofxGamepadHandler* ofxGamepadHandler::singleton;
@@ -15,9 +18,6 @@ ofxGamepadHandler::ofxGamepadHandler():hasHotplug(false),hotplugNext(0)
 {
 	ofAddListener(ofEvents.update, this, &ofxGamepadHandler::update);
 	ofAddListener(ofEvents.exit, this, &ofxGamepadHandler::exit);
-#ifdef USE_OIS
-	
-#endif
 	updatePadList();
 }
 
@@ -48,26 +48,45 @@ void ofxGamepadHandler::updatePadList()
 			oisInputManager->destroyInputSystem(oisInputManager);
 		}
 		ParamList pl;
-		oisInputManager=InputManager::createInputSystem(pl);
+		InputManager* inputManager=InputManager::createInputSystem(pl);
 		
-		int numPads = oisInputManager->getNumberOfDevices(OISJoyStick);
+		gamepadList padsOld=gamepads;
+		std::vector<tempPad> sticks;
+		gamepads.clear();
+		
+		int numPads = inputManager->getNumberOfDevices(OISJoyStick);
 		for( int i = 0; i < numPads; i++ )
 		{
-			JoyStick* js = (JoyStick*)oisInputManager->createInputObject(OISJoyStick, true );
-			if (i<gamepads.size()) {
-				gamepads[i]->updateJoystick(js);
-			}else{
-				gamepads.push_back(ofPtr<ofxGamepadOIS>(new ofxGamepadOIS(js)));
-			}
+			JoyStick* js = (JoyStick*)inputManager->createInputObject(OISJoyStick, true );
+			sticks.push_back(tempPad(js));
 		}
 		
-		if(numPads<gamepads.size()){
-			int diff=gamepads.size()-numPads;
-			int processed=0;
-			for(int i=gamepads.size()-diff;i<gamepads.size();i++){
-				gamepads[i]->disable();
+		std::vector<tempPad>::iterator sIt = sticks.begin();
+		while(sIt!=sticks.end()){
+			gamepadList::iterator gIt = padsOld.begin();
+			while(gIt!=padsOld.end()){
+				if((*sIt).stick->vendor() == (*gIt)->name){
+					ofPtr<ofxGamepadOIS> p = *gIt;
+					p->updateJoystick((*sIt).stick);
+					gamepads.push_back(p);
+					padsOld.erase(gIt);
+					(*sIt).handled = true;
+					break;
+				}
+				++gIt;
 			}
+			++sIt;
 		}
+		
+		sIt = sticks.begin();
+		while(sIt!=sticks.end()){
+			cout << (*sIt).handled << endl;
+			if(!(*sIt).handled)
+				gamepads.push_back(ofPtr<ofxGamepadOIS>(new ofxGamepadOIS((*sIt).stick)));
+			++sIt;
+		}
+
+		oisInputManager = inputManager;
 	}
 	catch(OIS::Exception &ex)
 	{

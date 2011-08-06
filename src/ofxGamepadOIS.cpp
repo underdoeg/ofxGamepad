@@ -34,8 +34,7 @@ void ofxGamepadOIS::updateJoystick(OIS::JoyStick* js){
 	setNumButtons(joystick->getNumberOfComponents(OIS_Button));
 	setName(joystick->vendor());
 	joystick->setEventCallback(this);
-	
-	uniqueName=name+ofToString(id);
+	id=joystick->getID();
 }
 
 void ofxGamepadOIS::update(){

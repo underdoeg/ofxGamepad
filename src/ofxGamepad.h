@@ -58,8 +58,6 @@ public:
 	ofPoint drawSize;
 	string name;	
 	int id;
-	
-	string uniqueName;
 
 	GAMEPAD_TYPE type;
 
