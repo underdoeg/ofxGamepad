@@ -60,6 +60,14 @@ void ofxGamepadHandler::updatePadList()
 				gamepads.push_back(ofPtr<ofxGamepadOIS>(new ofxGamepadOIS(js)));
 			}
 		}
+		
+		if(numPads<gamepads.size()){
+			int diff=gamepads.size()-numPads;
+			int processed=0;
+			for(int i=gamepads.size()-diff;i<gamepads.size();i++){
+				gamepads[i]->disable();
+			}
+		}
 	}
 	catch(OIS::Exception &ex)
 	{

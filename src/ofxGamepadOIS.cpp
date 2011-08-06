@@ -28,6 +28,7 @@ ofxGamepadOIS::~ofxGamepadOIS(){
 };
 
 void ofxGamepadOIS::updateJoystick(OIS::JoyStick* js){
+	isDisabled=false;
 	joystick = js;
 	setNumAxis(joystick->getNumberOfComponents(OIS_Axis));
 	setNumButtons(joystick->getNumberOfComponents(OIS_Button));
@@ -38,6 +39,8 @@ void ofxGamepadOIS::updateJoystick(OIS::JoyStick* js){
 }
 
 void ofxGamepadOIS::update(){
+	if(isDisabled)
+		return;
 	joystick->capture();
 }
 

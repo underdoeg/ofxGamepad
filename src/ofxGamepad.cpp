@@ -2,7 +2,7 @@
 
 int ofxGamepad::curID=0;
 
-ofxGamepad::ofxGamepad():id(curID),axisMinVal(-32768),axisMaxVal(32767)
+ofxGamepad::ofxGamepad():id(curID),axisMinVal(-32768),axisMaxVal(32767),isDisabled(false)
 {
 	curID++;
 }
@@ -143,4 +143,8 @@ void ofxGamepad::setName(string n)
 	} else {
 		type = GAMEPAD_UNKNOWN;
 	}
+}
+
+void ofxGamepad::disable(){
+	isDisabled=true;
 }

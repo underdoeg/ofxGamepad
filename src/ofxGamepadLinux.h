@@ -15,7 +15,7 @@ public:
 
 	void update();
 	void exit();
-
+	
 private:
 	int fd;
 	string filename;

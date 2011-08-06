@@ -52,6 +52,8 @@ public:
 
 	void draw(int x, int y);
 	virtual void exit(){};
+	
+	void disable();
 
 	ofPoint drawSize;
 	string name;	
@@ -70,6 +72,7 @@ protected:
 
 	int axisMinVal;
 	int axisMaxVal;
+	bool isDisabled;
 
 private:
 	static int curID;
