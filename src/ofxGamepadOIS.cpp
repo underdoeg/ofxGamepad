@@ -16,14 +16,7 @@ ofxGamepadOIS::ofxGamepadOIS(InputManager* inputManager):ofxGamepad(){
 };
 
 ofxGamepadOIS::ofxGamepadOIS(OIS::JoyStick* js){
-	joystick = js;
-	setNumAxis(joystick->getNumberOfComponents(OIS_Axis));
-	setNumButtons(joystick->getNumberOfComponents(OIS_Button));
-	setName(joystick->vendor());
-	joystick->setEventCallback(this);
-	
-	uniqueName=name+ofToString(id);
-	
+	updateJoystick(js);
 	string msg=name;
 	msg += ": "+ofToString(getNumAxis())+" axis";
 	msg += ", "+ofToString(getNumButtons())+" buttons";
@@ -35,7 +28,13 @@ ofxGamepadOIS::~ofxGamepadOIS(){
 };
 
 void ofxGamepadOIS::updateJoystick(OIS::JoyStick* js){
-	joystick=js;
+	joystick = js;
+	setNumAxis(joystick->getNumberOfComponents(OIS_Axis));
+	setNumButtons(joystick->getNumberOfComponents(OIS_Button));
+	setName(joystick->vendor());
+	joystick->setEventCallback(this);
+	
+	uniqueName=name+ofToString(id);
 }
 
 void ofxGamepadOIS::update(){

@@ -44,39 +44,22 @@ void ofxGamepadHandler::updatePadList()
 #ifdef USE_OIS
 	try
 	{
-		InputManager* oldManager=NULL;
 		if(oisInputManager != NULL){ 
-			oldManager=oisInputManager;
+			oisInputManager->destroyInputSystem(oisInputManager);
 		}
-		//ofLog(OF_LOG_NOTICE, "lgaooking for new devices");
 		ParamList pl;
 		oisInputManager=InputManager::createInputSystem(pl);
 		
-		/*DeviceList devices = oisInputManager->listFreeDevices();
-		DeviceList::iterator it = devices.begin();
-		while(it!=devices.end()){
-			if(it->first == OISJoyStick){
-				JoyStick* stick = (JoyStick*)oisInputManager->createInputObject(OISJoyStick, true, it->second);
-				gamepads.push_back(ofPtr<ofxGamepad>(new ofxGamepadOIS(stick)));
-			}
-			++it;
-		}*/
-		
-		
-		int numSticks = oisInputManager->getNumberOfDevices(OISJoyStick);
-		for( int i = 0; i < numSticks; ++i )
+		int numPads = oisInputManager->getNumberOfDevices(OISJoyStick);
+		for( int i = 0; i < numPads; i++ )
 		{
 			JoyStick* js = (JoyStick*)oisInputManager->createInputObject(OISJoyStick, true );
-			if (gamepads.size()<i) {
+			if (i<gamepads.size()) {
 				gamepads[i]->updateJoystick(js);
+			}else{
+				gamepads.push_back(ofPtr<ofxGamepadOIS>(new ofxGamepadOIS(js)));
 			}
-			gamepads.push_back(ofPtr<ofxGamepadOIS>(new ofxGamepadOIS(js)));
 		}
-		
-		if(oldManager != NULL){ 
-			oisInputManager->destroyInputSystem(oldManager);
-		}
-		
 	}
 	catch(OIS::Exception &ex)
 	{
