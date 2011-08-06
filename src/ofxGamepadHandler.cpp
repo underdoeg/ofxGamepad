@@ -80,7 +80,6 @@ void ofxGamepadHandler::updatePadList()
 		
 		sIt = sticks.begin();
 		while(sIt!=sticks.end()){
-			cout << (*sIt).handled << endl;
 			if(!(*sIt).handled)
 				gamepads.push_back(ofPtr<ofxGamepadOIS>(new ofxGamepadOIS((*sIt).stick)));
 			++sIt;
