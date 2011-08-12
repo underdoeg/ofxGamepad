@@ -8,7 +8,7 @@ void gamepadExampleApp::setup(){
 	ofSetFrameRate(120);
 	ofSetLogLevel(OF_LOG_VERBOSE);
 
-	//ofxGamepadHandler::get()->enableHotplug();
+	ofxGamepadHandler::get()->enableHotplug();
 	ofxGamepadHandler::get()->getGamepad(0)->rumble(1);
 }
 

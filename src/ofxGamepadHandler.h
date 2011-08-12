@@ -21,7 +21,7 @@ typedef std::vector< ofPtr<ofxGamepad> > gamepadList;
 #endif;
 
 
-class ofxGamepadHandler {
+class ofxGamepadHandler: public ofThread {
 
 public:
 	~ofxGamepadHandler();
@@ -32,18 +32,21 @@ public:
 
 	void updatePadList();
 	void update(ofEventArgs &arg);
+	void update();
 	void draw(int x, int y);
 	void enableHotplug(int interval=1500); //interval in milliseconds the system looks for new gamepads
 	
 	ofEvent<ofxGamepadEvent> onGamepadPlug;
 	ofEvent<ofxGamepadEvent> onGamepadUnplug;
-	
+
+	void threadedFunction();
 
 private:
 	void exit(ofEventArgs &arg);
 	ofxGamepadHandler();
 
 	gamepadList gamepads;
+	gamepadList gamepadsNew;
 
 	static ofxGamepadHandler* singleton;
 	static bool hasSingleton;
@@ -52,6 +55,7 @@ private:
 	int hotplugNext;
 	int hotplugInterval;
 
+	std::vector<int> activeIDs;
 };
 
 #endif // OFXGAMEPADHANDLER_H
