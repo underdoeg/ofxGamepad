@@ -11,6 +11,10 @@ class gamepadExampleApp : public ofBaseApp{
 		void update();
 		void draw();
 
+		void axisChanged(ofxGamepadAxisEvent &e);
+		void buttonPressed(ofxGamepadButtonEvent &e);
+		void buttonReleased(ofxGamepadButtonEvent &e);
+
 		void keyPressed  (int key);
 		void keyReleased(int key);
 		void mouseMoved(int x, int y );

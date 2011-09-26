@@ -11,8 +11,12 @@ void gamepadExampleApp::setup(){
 	ofxGamepadHandler::get()->enableHotplug();
 	
 	//CHECK IF THERE EVEN IS A GAMEPAD CONNECTED
-	if(ofxGamepadHandler::get()->getNumPads()>0)
-		ofxGamepadHandler::get()->getGamepad(0)->rumble(1);
+	if(ofxGamepadHandler::get()->getNumPads()>0){
+			ofxGamepad* pad = ofxGamepadHandler::get()->getGamepad(0);
+			ofAddListener(pad->onAxisChanged, this, &gamepadExampleApp::axisChanged);
+			ofAddListener(pad->onButtonPressed, this, &gamepadExampleApp::buttonPressed);
+			ofAddListener(pad->onButtonReleased, this, &gamepadExampleApp::buttonReleased);
+	}
 }
 
 //--------------------------------------------------------------
@@ -22,6 +26,23 @@ void gamepadExampleApp::update(){
 //--------------------------------------------------------------
 void gamepadExampleApp::draw(){
 	ofxGamepadHandler::get()->draw(10,10);
+}
+
+//--------------------------------------------------------------
+
+void gamepadExampleApp::axisChanged(ofxGamepadAxisEvent& e)
+{
+	cout << "AXIS " << ofToString(e.axis) << " VALUE " << ofToString(e.value) << endl;
+}
+
+void gamepadExampleApp::buttonPressed(ofxGamepadButtonEvent& e)
+{
+	cout << "BUTTON " << ofToString(e.button) << " PRESSED" << endl;
+}
+
+void gamepadExampleApp::buttonReleased(ofxGamepadButtonEvent& e)
+{
+	cout << "BUTTON " << ofToString(e.button) << " RELEASED" << endl;
 }
 
 //--------------------------------------------------------------
@@ -68,3 +89,6 @@ void gamepadExampleApp::gotMessage(ofMessage msg){
 void gamepadExampleApp::dragEvent(ofDragInfo dragInfo){ 
 
 }
+
+
+
