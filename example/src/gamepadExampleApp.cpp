@@ -32,17 +32,17 @@ void gamepadExampleApp::draw(){
 
 void gamepadExampleApp::axisChanged(ofxGamepadAxisEvent& e)
 {
-	cout << "AXIS " << ofToString(e.axis) << " VALUE " << ofToString(e.value) << endl;
+	cout << "AXIS " << e.axis << " VALUE " << ofToString(e.value) << endl;
 }
 
 void gamepadExampleApp::buttonPressed(ofxGamepadButtonEvent& e)
 {
-	cout << "BUTTON " << ofToString(e.button) << " PRESSED" << endl;
+	cout << "BUTTON " << e.button << " PRESSED" << endl;
 }
 
 void gamepadExampleApp::buttonReleased(ofxGamepadButtonEvent& e)
 {
-	cout << "BUTTON " << ofToString(e.button) << " RELEASED" << endl;
+	cout << "BUTTON " << e.button << " RELEASED" << endl;
 }
 
 //--------------------------------------------------------------
