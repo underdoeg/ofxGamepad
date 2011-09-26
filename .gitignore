@@ -4,3 +4,7 @@ example/example.tags
 example/emptyExample.workspace.session
 example/obj/
 .DS_Store
+*.pbxuser
+*.mode1v3
+example/build
+*.app

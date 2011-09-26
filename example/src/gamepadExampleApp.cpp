@@ -9,7 +9,10 @@ void gamepadExampleApp::setup(){
 	ofSetLogLevel(OF_LOG_VERBOSE);
 
 	ofxGamepadHandler::get()->enableHotplug();
-	ofxGamepadHandler::get()->getGamepad(0)->rumble(1);
+	
+	//CHECK IF THERE EVEN IS A GAMEPAD CONNECTED
+	if(ofxGamepadHandler::get()->getNumPads()>0)
+		ofxGamepadHandler::get()->getGamepad(0)->rumble(1);
 }
 
 //--------------------------------------------------------------
