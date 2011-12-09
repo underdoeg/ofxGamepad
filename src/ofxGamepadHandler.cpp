@@ -125,6 +125,7 @@ void ofxGamepadHandler::updatePadList() {
 				gamepadsNew.push_back(ofPtr<ofxGamepad>(new ofxGamepadLinux(file.getAbsolutePath())));
 				activeIDs.push_back(i);
 			} catch(std::exception& err) {
+				ofLog(OF_LOG_ERROR, "could not create new gamepad");
 			}
 		}
 	}
@@ -175,6 +176,7 @@ ofxGamepad* ofxGamepadHandler::getGamepad(int num) {
 	if(getNumPads()>0)
 		return gamepads[num].get();
 	ofLog(OF_LOG_WARNING, "ofxGamepad::getGamepad(): WARNING NO GAMEPAD CONNECTED. GAMEPAD IS NULL.");
+	return NULL;
 }
 
 int ofxGamepadHandler::getNumPads() {

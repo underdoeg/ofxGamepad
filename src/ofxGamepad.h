@@ -6,6 +6,15 @@
 
 class ofxGamepad;
 
+class ofxGamepadThreshold{
+public:
+	ofxGamepadThreshold(){
+		min = max = 0.05;
+	}
+	float min;
+	float max;
+};
+
 class ofxGamepadEvent
 {
 public:
@@ -57,6 +66,9 @@ public:
 	
 	void disable();
 
+	void setAxisThreshold(int axis, float thresh);
+	void setAxisThreshold(int axis, float min, float max);
+
 	ofPoint drawSize;
 	string name;	
 	int id;
@@ -80,6 +92,7 @@ private:
 	int numButtons;
 	std::vector<bool> buttonValues;
 	std::vector<float> axisValues;
+	std::map<int, ofxGamepadThreshold> axisThreshold;
 };
 
 #endif // OFXGAMEPAD_H

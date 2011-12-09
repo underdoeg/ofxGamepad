@@ -78,11 +78,11 @@ void ofxGamepadOIS::update(){
 }
 
 bool ofxGamepadOIS::buttonPressed( const OIS::JoyStickEvent &arg, int button ){
-	buttonChanged(button, 0);
+	buttonChanged(button, 1);
 	return true;
 };
 bool ofxGamepadOIS::buttonReleased( const OIS::JoyStickEvent &arg, int button ){
-	buttonChanged(button, 1);
+	buttonChanged(button, 0);
 	return true;
 };
 bool ofxGamepadOIS::axisMoved( const OIS::JoyStickEvent &arg, int axis ){

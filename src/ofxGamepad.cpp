@@ -13,7 +13,10 @@ ofxGamepad::~ofxGamepad()
 
 void ofxGamepad::axisChanged(int axis, int value)
 {
-	axisValues[axis]=ofMap(value, axisMinVal, axisMaxVal, -1, 1);
+	float val = ofMap(value, axisMinVal, axisMaxVal, -1, 1);
+	if(val>-axisThreshold[axis].min && val<axisThreshold[axis].max)
+		val = 0;
+	axisValues[axis]=val;
 	static ofxGamepadAxisEvent evt;
 	evt.gamepad=this;
 	evt.axis=axis;
@@ -74,12 +77,18 @@ void ofxGamepad::setNumAxis(int amt)
 {
 	numAxis = amt;
 	axisValues.resize(numAxis);
+	for(int i=0;i<axisValues.size();i++){
+		axisValues[i] = 0;
+	}
 }
 
 void ofxGamepad::setNumButtons(int amt)
 {
 	numButtons = amt;
 	buttonValues.resize(numButtons);
+	for(int i=0;i<buttonValues.size();i++){
+		buttonValues[i] = false;
+	}
 }
 
 void ofxGamepad::draw(int x, int y)
@@ -148,3 +157,15 @@ void ofxGamepad::setName(string n)
 void ofxGamepad::disable(){
 	isDisabled=true;
 }
+
+void ofxGamepad::setAxisThreshold(int axis, float thresh)
+{
+	setAxisThreshold(axis, thresh, thresh);
+}
+
+void ofxGamepad::setAxisThreshold(int axis, float min, float max)
+{
+	axisThreshold[axis].max = max;
+	axisThreshold[axis].min = min;
+}
+

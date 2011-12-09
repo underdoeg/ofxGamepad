@@ -75,7 +75,7 @@ void ofxGamepadLinux::setupFF() {
 		fName = "/dev/input/event"+list[list.size()-1]; //There is a problem here, thought that the event number is always the same as the js number, but it is not...
 
 	if ((fdEvent = open(fName.c_str(), O_RDWR)) < 0) { // change from O_RDONLY to O_RDWR need in force feedback
-		ofLog(OF_LOG_ERROR,"could not open joystick input event");
+		ofLog(OF_LOG_WARNING,"could not open joystick input event "+fName+". This means force feedback is not going to work");
 		return;
 	}
 	fcntl( fdEvent, F_SETFL, O_NONBLOCK );
