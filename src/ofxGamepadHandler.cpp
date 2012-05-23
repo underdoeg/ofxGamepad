@@ -18,8 +18,8 @@ ofxGamepadHandler* ofxGamepadHandler::singleton;
 bool ofxGamepadHandler::hasSingleton = false;
 
 ofxGamepadHandler::ofxGamepadHandler():hasHotplug(false),hotplugNext(0) {
-	ofAddListener(ofEvents.update, this, &ofxGamepadHandler::update);
-	ofAddListener(ofEvents.exit, this, &ofxGamepadHandler::exit);
+	ofAddListener(ofEvents().update, this, &ofxGamepadHandler::update);
+	ofAddListener(ofEvents().exit, this, &ofxGamepadHandler::exit);
 	updatePadList();
 	gamepads.insert(gamepads.end(), gamepadsNew.begin(), gamepadsNew.end());
 	gamepadsNew.clear();

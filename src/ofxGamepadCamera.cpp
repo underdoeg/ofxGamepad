@@ -13,7 +13,7 @@ void ofxGamepadCamera::setup() {
 	} else
 		ofLogWarning("no gamepad connected in ofxGamepadCAmera::setup");
 
-	ofAddListener(ofEvents.update, this, &ofxGamepadCamera::update);
+	ofAddListener(ofEvents().update, this, &ofxGamepadCamera::update);
 }
 
 void ofxGamepadCamera::update(ofEventArgs& e) {
