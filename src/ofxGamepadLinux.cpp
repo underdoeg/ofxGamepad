@@ -48,16 +48,17 @@ ofxGamepadLinux::~ofxGamepadLinux() {
 
 void ofxGamepadLinux::update() {
 	struct js_event event;
-	read(fd, &event, sizeof(struct js_event));
+	while (read(fd, &event, sizeof(struct js_event)) > 0) {
 
-	/* see what to do with the event */
-	switch (event.type & ~JS_EVENT_INIT) {
-	case JS_EVENT_AXIS:
+	    /* see what to do with the event */
+	    switch (event.type & ~JS_EVENT_INIT) {
+	      case JS_EVENT_AXIS:
 		axisChanged(event.number, event.value);
 		break;
-	case JS_EVENT_BUTTON:
+	      case JS_EVENT_BUTTON:
 		buttonChanged(event.number, event.value);
 		break;
+	    }
 	}
 
 }
